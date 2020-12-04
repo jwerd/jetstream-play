@@ -7,6 +7,7 @@ use Livewire\Component;
 
 class Show extends Component
 {
+    public $confirmingTodoDeletion = false;
     protected $listeners = ['saved'];
 
     public function render()
@@ -38,5 +39,16 @@ class Show extends Component
     public function deleteItem(TodoItem $item)
     {
         $item->delete();
+        $this->confirmingTodoDeletion = false;
+    }
+
+    public function confirmingTodoDeletion()
+    {
+        return !$this->confirmingTodoDeletion;
+    }
+
+    public function confirmTodoDeletion(TodoItem $item)
+    {
+        $this->confirmingTodoDeletion = true;
     }
 }
